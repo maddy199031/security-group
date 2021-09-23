@@ -4,14 +4,15 @@ variable "name" {}
 variable "region" {}
 variable "description" {}
 variable "vpc_id" {}
-variable "sg_ingress_rules"{
+variable "ingress_rule"{
   type = map
 }
-variable "sg_egress_rules"{
+variable "egress_rule"{
   type = map
 }
 variable "tags" {
-  type = map
+  type    = map(string)
+  default = {}
 }
 
 #######  Egress rules ######
@@ -42,10 +43,3 @@ variable "ingress_rules" {
     }))
     default     = []
 }
-
-
-
-
-
-
-
