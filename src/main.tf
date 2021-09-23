@@ -4,17 +4,17 @@ resource "aws_security_group" "sg" {
   vpc_id       = var.vpc_id
 
   ingress {
-    from_port   = lookup(var.sg_ingress_rules,"ingress_from_port")
-    to_port     = lookup(var.sg_ingress_rules,"ingress_to_port")
-    protocol    = lookup(var.sg_ingress_rules,"ingress_protocol")
-    cidr_blocks = [lookup(var.sg_ingress_rules,"access_ip")]
+    from_port   = lookup(var.ingress_rule,"ingress_from_port")
+    to_port     = lookup(var.ingress_rule,"ingress_to_port")
+    protocol    = lookup(var.ingress_rule,"ingress_protocol")
+    cidr_blocks = [lookup(var.ingress_rule,"access_ip")]
   }
 
   egress {
-    from_port   = lookup(var.sg_egress_rules,"egress_from_port")
-    to_port     = lookup(var.sg_egress_rules,"egress_from_port")
-    protocol    = lookup(var.sg_egress_rules,"egress_protocol")
-    cidr_blocks = [lookup(var.sg_egress_rules,"access_ip")]
+    from_port   = lookup(var.egress_rule,"egress_from_port")
+    to_port     = lookup(var.egress_rule,"egress_from_port")
+    protocol    = lookup(var.egress_rule,"egress_protocol")
+    cidr_blocks = [lookup(var.egress_rule,"access_ip")]
   }
   tags                       = var.tags
 }
