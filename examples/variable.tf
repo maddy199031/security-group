@@ -16,7 +16,7 @@ variable "vpc_id" {
   default= "vpc-0c53ca67"
 }
 
-variable "sg_ingress_rules"{
+variable "ingress_rule"{
   type = map
   default = {
         ingress_from_port  = 22
@@ -26,7 +26,7 @@ variable "sg_ingress_rules"{
 }
 }
 
-variable "sg_egress_rules"{
+variable "egress_rule"{
   type = map
   default = {
         egress_from_port   = 0
@@ -37,37 +37,22 @@ variable "sg_egress_rules"{
 }
 
 
-variable "sg_tags" {
-  type = map
-
-  default = {
-    Name        = "Module Name"
-    AppName     = "Module AppName"
-    Environment =  "Module Environment"
-  }
+variable "tags" {
+  type    = map(string)
+  default = {}
 }
-
-############################################################
-
 
 
 
 variable "ingress_rules" {
     default     = [
         {
-          from_port   = 22
-          to_port     = 22
-          protocol    = "tcp"
-          cidr_block  = "4.2.2.1/32"
-          description = "ingress_rules1"
-        },
-        {
           from_port   = 23
           to_port     = 23
           protocol    = "tcp"
-          cidr_block  = "4.2.2.2/32"
-          description = "ingress_rules2"
-        }        
+          cidr_block  = "4.2.2.1/32"
+          description = "ingress_rules1"
+        }     
     ]
 }
 
