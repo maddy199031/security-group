@@ -1,71 +1,80 @@
+
+variable "name" {
+  type = string  
+}
 variable "region" {
-    default = "us-east-2"
+  type = string  
 }
-
-variable "sg_name" {
-  type = string
-  default= "security_group_name_module"
+variable "description" {
+  type = string  
 }
-variable "sg_description" {
-  type = string
-  default= "sg_description_module"
-}
-
 variable "vpc_id" {
-  description = "A list of subnet IDs to attach to the ELB"
-  default= "vpc-0c53ca67"
+  type = string
 }
-
 variable "ingress_rule"{
   type = map
-  default = {
-        ingress_from_port  = 22
-        ingress_to_port    = 22
-        ingress_protocol   = "tcp"
-        access_ip          = "0.0.0.0/0"
 }
-}
-
 variable "egress_rule"{
   type = map
-  default = {
-        egress_from_port   = 0
-        egress_to_port     = 0
-        egress_protocol    = -1
-        access_ip          = "0.0.0.0/0"
 }
-}
-
-
 variable "tags" {
   type    = map(string)
-  default = {}
+}
+
+variable "egress_rules" {
+    type = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_block  = string
+      description = string
+    }))
+
+    default    = [
+      {
+        from_port   = 0,
+        to_port     = 0,
+        protocol    = -1,
+        cidr_blocks = ["0.0.0.0/0"],
+      }
+    ]
 }
 
 
 
 variable "ingress_rules" {
-    default     = [
-        {
-          from_port   = 23
-          to_port     = 23
-          protocol    = "tcp"
-          cidr_block  = "4.2.2.1/32"
-          description = "ingress_rules1"
-        }     
-    ]
-}
+    type = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_block  = string
+      description = string
+    }))
 
-
-variable "egress_rules" {
-
-    default     = [
-        {
-          from_port   = 0
-          to_port     = 0
-          protocol    = "tcp"
-          cidr_block  = "4.5.6.4/32"
-          description = "egress_rules1"
-        }
+    default    = [
+      {
+        from_port   = 22,
+        to_port     = 22,
+        protocol    = "tcp",
+        cidr_blocks = ["10.0.0.0/8"],
+      },
+      {
+        from_port   = 3,
+        to_port     = -1,
+        protocol    = "icmp",
+        cidr_blocks = ["10.0.0.0/8"],
+      },
+      {
+        from_port   = 8,
+        to_port     = -1,
+        protocol    = "icmp",
+        cidr_blocks = ["10.0.0.0/8"],
+      },
+      {
+        from_port   = 11,
+        to_port     = -1,
+        protocol    = "icmp",
+        cidr_blocks = ["10.0.0.0/8"],
+      },
     ]
 }
