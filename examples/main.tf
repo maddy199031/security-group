@@ -1,8 +1,8 @@
 module "SecuritytGroup" {
   source = "../src/"
   region              = var.region
-  name                = var.sg_name
-  description         = var.sg_description
+  name                = var.name
+  description         = var.description
   vpc_id              = var.vpc_id
   ingress_rule        = var.ingress_rule
   egress_rule         = var.egress_rule
@@ -13,7 +13,7 @@ module "SecuritytGroup" {
 }
 
 
-output "output" {
+output "outputs" {
   
-    value = module.SecuritytGroup.v_1_0_7
+    value = module.SecuritytGroup.v_1_0_0
 }
