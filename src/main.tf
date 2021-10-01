@@ -43,4 +43,3 @@ resource "aws_security_group_rule" "egress_rules" {
   description       = var.egress_rules[count.index].description
   security_group_id = aws_security_group.sg.id
 }
-
